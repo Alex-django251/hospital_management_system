@@ -1,9 +1,23 @@
-import os
-from django.core.wsgi import get_wsgi_application
-
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'hospital_management_system.settings')
-
-application = get_wsgi_application()
-
-# ADD THIS LINE AT THE END
-app = application
+{
+    "version": 2,
+    "builds": [
+        {
+            "src": "hospital_management_system/wsgi.py",
+            "use": "@vercel/python",
+            "config": {
+                "maxLambdaSize": "15mb",
+                "runtime": "python3.12"
+            }
+        }
+    ],
+    "routes": [
+        {
+            "src": "/static/(.*)",
+            "dest": "/static/$1"
+        },
+        {
+            "src": "/(.*)",
+            "dest": "hospital_management_system/wsgi.py"
+        }
+    ]
+}
