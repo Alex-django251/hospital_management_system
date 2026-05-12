@@ -1,5 +1,3 @@
-#!/usr/bin/env bash
-pip install -r requirements.txt
-python manage.py collectstatic --noinput
-python manage.py migrate --noinput
-echo "from django.contrib.auth import get_user_model; User = get_user_model(); User.objects.filter(username='admin').exists() or User.objects.create_superuser('admin', 'admin@email.com', 'admin123')" | python manage.py shell
+pip install -r requirements.txt   # install packages
+python manage.py collectstatic --noinput  # collect static files
+python manage.py migrate --noinput        # run database migrations
