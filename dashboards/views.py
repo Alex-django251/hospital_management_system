@@ -83,19 +83,5 @@ def receptionist_dashboard(request):
 
 
 
-from django.http import HttpResponse
-from django.core.management import call_command
-import os
 
-def run_migrations(request):
-    # Secret key check so random people can't trigger it
-    secret = request.GET.get('secret')
-    if secret != os.environ.get('MIGRATION_SECRET', 'changeme'):
-        return HttpResponse('Forbidden', status=403)
-    
-    try:
-        call_command('migrate', '--noinput')
-        return HttpResponse('✅ Migrations ran successfully!')
-    except Exception as e:
-        return HttpResponse(f'❌ Error: {str(e)}', status=500)
     
